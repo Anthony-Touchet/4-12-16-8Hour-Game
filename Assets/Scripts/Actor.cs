@@ -4,8 +4,8 @@ using System.Collections;
 public class Actor : MonoBehaviour {
 
     public int health;
-    protected float speed;
-    protected int bullDam;
+    public float speed;
+    public int bullDam;
     protected float fireRate;
 	
 	// Update is called once per frame

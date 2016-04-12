@@ -21,4 +21,13 @@ public class BulletControler : MonoBehaviour {
             Lerp(new Vector3(.5f, 0, 0));
         }
 	}
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Enemy")  //If it's an bullet
+        {
+            other.gameObject.GetComponent<EnemyRunnerScript>().health -= damage;   //Take damage
+            Destroy(gameObject);
+        }
+    }
 }

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public class TargetController : Actor {
+    public Slider healthSlider;
     float hurtRate;
     float nextHurt;
 
@@ -9,14 +10,16 @@ public class TargetController : Actor {
 	void Start () {
         health = 100;
         hurtRate = 1f;
-	}
+        healthSlider.maxValue = health;
+    }
 	
-
 	new void Update () {
         if(base.Update())
         {
             alive = false;
         }
+
+        healthSlider.value = health;
 	}
 
     void OnTriggerStay(Collider other)

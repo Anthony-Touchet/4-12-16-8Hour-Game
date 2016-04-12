@@ -4,7 +4,7 @@ using System;
 
 public class EnemyRunnerScript : Actor
 {
-    public GameObject target;
+    GameObject target;
     GameObject TM;
     Vector3 offest;
     Vector3 movement;
@@ -21,15 +21,12 @@ public class EnemyRunnerScript : Actor
         offest = new Vector3(0, 0, 0);
         TM = GameObject.Find("TargetManager");
         target = FindNearestTarget(gameObject);
-        health = 10;   //Player's Health: how much x before destroyed.
-        speed = 2;      //Speed of the player. the higher it is the slower he will move
-        bullDam = 10;   //How much damage the enemy will Deal.
         fireRate = 1f;  //How fast the player will be able to fire.
         expWorth = 10;
     }
 
     // Update is called once per frame
-    new public void Update()
+    void FixedUpdate()
     {
         if(base.Update())  //Check to see if health is zero.
         {
@@ -67,12 +64,11 @@ public class EnemyRunnerScript : Actor
         Lerp(movement);
     }
 
-    void OnCollisionEnter(Collision other)
+    new void Update()
     {
-        if (other.gameObject.tag == "Bullet")  //If it's an bullet
+        if(target == null)
         {
-            health -= other.gameObject.GetComponent<BulletControler>().damage;   //Take damage
-            Destroy(other.gameObject);
+            target = FindNearestTarget(gameObject);
         }
     }
 
